@@ -43,9 +43,10 @@ int main(int argc, char **argv)
 				fprintf(stderr, "L%d: usage: push integer", count);
 				exit(EXIT_FAILURE);
 			}
-		}
-		if (line_number != NULL && strlen(line_number) != 0)
 			sw_cmd(cmd, &k_stack, atoi(line_number));
+		}
+		else
+			sw_cmd(cmd, &k_stack, 0);
 	}
 	fclose(f);
 	free_stack(&k_stack);
