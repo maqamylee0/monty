@@ -45,6 +45,12 @@ int main(int argc, char **argv)
 	free_stack(k_stack);
 }
 
+/**
+ * free_stack- frees stack
+ * @k_stack: stack
+ * Return: nothing
+ */
+
 void free_stack(stack_t k_stack)
 {
 	stack_t top;
@@ -56,6 +62,15 @@ void free_stack(stack_t k_stack)
 		free(top);
 	}
 }
+
+/**
+ * switch_cmd- sitches command
+ * @k_stack: stack
+ * @line_number: line number
+ * @count: keep track of position
+ * cmd: entered command
+ * Return: nothing
+ */
 
 void switch_cmd(char *cmd, char *k_stack, unsigned int line_number, int count)
 {
