@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 	if (!f)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit7(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	while (fgets(buffer, buffer_len, f))
 	{
@@ -77,25 +77,25 @@ void switch_cmd(char *cmd, char *k_stack, unsigned int line_number, int count)
 	switch (cmd)
 	{
 		case "push":
-			instructions[0].f(&k_stack, line_number);
+			push(&k_stack, line_number, count);
 			break;
 		case "pall":
-			instructions[1].f(&k_stack, line_number);
+			pall(&k_stack, line_number);
 			break;
 		case "pint":
-			instructions[2].f(&k_stack, line_number);
+			pint(&k_stack, line_number);
 			break;
 		case "pop":
-			instructions[3].f(&k_stack, line_number);
+			pop(&k_stack, line_number);
 			break;
 		case "swap":
-			instructions[4].f(&k_stack, line_number);
+			swap(&k_stack, line_number);
 			break;
 		case "add":
-			instructions[5].f(&k_stack, line_number);
+			add(&k_stack, line_number);
 			break;
 		case "nop":
-			instructions[6].f(&k_stack, line_number);
+			nop(&k_stack, line_number);
 			break;
 		default:
 			fprint(stderr, "L%d: unknown instruction %s\n", count, cmd);

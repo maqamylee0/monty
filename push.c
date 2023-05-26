@@ -7,13 +7,13 @@
  * Return: void(nothing)
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number, int count)
 {
 	stack_t *top;
 
 	if (line_number == NULL || atoi(line_number) == 0)
 	{
-		fprintf(stderr, "L%d: usage: push integer", i);
+		fprintf(stderr, "L%d: usage: push integer", count);
 		exit(EXIT_FAILURE);
 	}
 	top = malloc(sizeof(stack_t));

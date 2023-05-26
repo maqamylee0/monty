@@ -35,8 +35,8 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 void switch_cmd(char *cmd, char *item, char *k_stack, unsigned int line_number, int count);
-void free(stack_t k_stack);
-void push(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t k_stack);
+void push(stack_t **stack, unsigned int line_number, int count);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
