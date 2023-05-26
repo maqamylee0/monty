@@ -8,18 +8,9 @@
  */
 int main(int argc, char **argv)
 {
-	instruction_t instructions[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{NULL, NULL}};
 	File *f;
 	char buffer[1024];
-	char *cmd, *
+	char *cmd;
 	size_t buffer_len;
 	ssize_t nchars_read;
 	unsigned int line_number;
@@ -36,7 +27,6 @@ int main(int argc, char **argv)
 		fputs("USAGE: monty file\n", stderr);
 		exit(EXIT_FAILURE);
 	}
-	
 	f = fopen(argv[1], "r");
 	if (!f)
 	{
@@ -47,9 +37,9 @@ int main(int argc, char **argv)
 	{
 		count++;
 		cmd = strtok(buffer, " ");
-		item = strtok(NULL, " ");
+		line_number = strtok(NULL, " ");
 
-		switch_cmd(cmd, item, k_stack, line_number, count);
+		switch_cmd(cmd, k_stack, line_number, count);
 	}
 	fclose(f);
 	free_stack(k_stack);
@@ -67,7 +57,7 @@ void free_stack(stack_t k_stack)
 	}
 }
 
-void switch_cmd(char *cmd, char *item, char *k_stack, unsigned int line_number, int count)
+void switch_cmd(char *cmd, char *k_stack, unsigned int line_number, int count)
 {
 	switch (cmd)
 	{
@@ -76,7 +66,7 @@ void switch_cmd(char *cmd, char *item, char *k_stack, unsigned int line_number, 
 			break;
 		case "pall":
 			instructions[1].f(&k_stack, line_number);
-			break;			
+			break;
 		case "pint":
 			instructions[2].f(&k_stack, line_number);
 			break;
@@ -96,4 +86,4 @@ void switch_cmd(char *cmd, char *item, char *k_stack, unsigned int line_number, 
 			fprint(stderr, "L%d: unknown instruction %s\n", count, cmd);
 			exit(EXIT_FAILURE);
 	}
-}	
+}
