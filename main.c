@@ -33,7 +33,8 @@ int main(int argc, char **argv)
 	while (fgets(buffer, sizeof(buffer), f) != NULL)
 	{
 		count++;
-		buffer[strcspn(buffer, "$")] = '\0';
+	        buffer[strcspn(buffer, "\n")] = '\0'; 
+		buffer[strcspn(buffer, "$")] = '\0'; 
 		cmd = strtok(buffer, " ");
 		line_number = strtok(NULL, " ");
 		if (strcmp(cmd, "push") == 0)
