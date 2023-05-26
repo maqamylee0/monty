@@ -34,21 +34,13 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-void switch_cmd(char *cmd, char *item, char *k_stack, unsigned int line_number, int count);
-void free_stack(stack_t k_stack);
-void push(stack_t **stack, unsigned int line_number, int count);
+void sw_cmd(char *cmd, stack_t *k_stack, unsigned int line_number, int count);
+void free_stack(stack_t *k_stack);
+void push(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-instruction_t instructions[] = {
-                {"push", push},
-                {"pall", pall},
-                {"pint", pint},
-                {"pop", pop},
-                {"swap", swap},
-                {"add", add},
-                {"nop", nop},
-                {NULL, NULL}};
 #endif

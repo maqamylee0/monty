@@ -1,3 +1,4 @@
+#include "monty.h"
 /**
  * nop- does nothing
  * @stack: stack
@@ -7,13 +8,13 @@
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
-	(void *)stack;
+	(void **)stack;
 }
 
 /**
  * add- adds top elements of stack
  * @stack: stack
- * @line_number
+ * @line_number: line number
  * Return: nothing
  */
 void add(stack_t **stack, unsigned int line_number)
