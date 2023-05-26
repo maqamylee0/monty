@@ -84,19 +84,19 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 	instruction_t instructions[] = {{"push", push}, {"pall", pall},
 		{"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {NULL, NULL}};
-	if (strcmp(cmd, "push"))
+	if (strcmp(cmd, "push") == 0)
 		instructions[0].f(k_stack, line_number);
-	else if (strcmp(cmd, "pall"))
+	else if (strcmp(cmd, "pall") == 0)
 		instructions[1].f(k_stack, line_number);
-	else if (strcmp(cmd, "pint"))
+	else if (strcmp(cmd, "pint") == 0)
 		instructions[2].f(k_stack, line_number);
-	else if (strcmp(cmd, "pop"))
+	else if (strcmp(cmd, "pop") == 0)
 		instructions[3].f(k_stack, line_number);
-	else if (strcmp(cmd, "swap"))
+	else if (strcmp(cmd, "swap") == 0)
 		instructions[4].f(k_stack, line_number);
-	else if (strcmp(cmd, "add"))
+	else if (strcmp(cmd, "add") == 0)
 		instructions[5].f(k_stack, line_number);
-	else if (strcmp(cmd, "nop"))
+	else if (strcmp(cmd, "nop") == 0)
 		instructions[6].f(k_stack, line_number);
 	else
 	{
