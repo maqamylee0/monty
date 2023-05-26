@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 /**
  * pchar- prints char from int
  * @line_number: linemumber

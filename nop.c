@@ -50,7 +50,7 @@ void sub(stack_t **stack, unsigned int line_number)
  * @line_number: line number
  * Return: nothing
  */
-void div(stack_t **stack, unsigned int line_number)
+void div2(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL  || (*stack)->next == NULL)
 	{

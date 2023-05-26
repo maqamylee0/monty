@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 		buffer[strcspn(buffer, "$")] = '\0';
 		cmd = strtok(buffer, " ");
 		line_number = strtok(NULL, " ");
-		if (cmd == "#")
+		if (strcmp(cmd, "#"))
 			continue;
 		if (strcmp(cmd, "push") == 0)
 		{
@@ -80,7 +80,7 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 {
 	instruction_t instructions[] = {{"push", push}, {"pall", pall},
 		{"pint", pint},	{"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {"sub", sub}, {"mul", mul}, {"div", div},
+		{"nop", nop}, {"sub", sub}, {"mul", mul}, {"div2", div2},
 		{"mod", mod}, {"pchar", pchar}, {NULL, NULL}};
 	if (strcmp(cmd, "push") == 0)
 		instructions[0].f(k_stack, line_number);
@@ -100,7 +100,7 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 		instructions[7].f(k_stack, line_number);
 	else if (strcmp(cmd, "mul") == 0)
 		instructions[8].f(k_stack, line_number);
-	else if (strcmp(cmd, "div") == 0)
+	else if (strcmp(cmd, "div2") == 0)
 		instructions[9].f(k_stack, line_number);
 	else if (strcmp(cmd, "mod") == 0)
 		instructions[10].f(k_stack, line_number);
