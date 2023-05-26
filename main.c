@@ -9,9 +9,7 @@
 int main(int argc, char **argv)
 {
 	FILE *f;
-	char buffer[1024];
-	char *cmd;
-	char *line_number = NULL;
+	char buffer[1024], *cmd, *line_number = NULL;
 	stack_t *k_stack = NULL;
 	int count = 0;
 
@@ -33,6 +31,8 @@ int main(int argc, char **argv)
 		buffer[strcspn(buffer, "$")] = '\0';
 		cmd = strtok(buffer, " ");
 		line_number = strtok(NULL, " ");
+		if (cmd == "#")
+			continue;
 		if (strcmp(cmd, "push") == 0)
 		{
 			if (line_number == NULL || strlen(line_number) == 0)
@@ -79,8 +79,9 @@ void free_stack(stack_t **k_stack)
 void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 {
 	instruction_t instructions[] = {{"push", push}, {"pall", pall},
-		{"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {NULL, NULL}};
+		{"pint", pint},	{"pop", pop}, {"swap", swap}, {"add", add},
+		{"nop", nop}, {"sub", sub}, {"mul", mul}, {"div", div},
+		{"mod", mod}, {"pchar", pchar}, {NULL, NULL}};
 	if (strcmp(cmd, "push") == 0)
 		instructions[0].f(k_stack, line_number);
 	else if (strcmp(cmd, "pall") == 0)
@@ -95,6 +96,16 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 		instructions[5].f(k_stack, line_number);
 	else if (strcmp(cmd, "nop") == 0)
 		instructions[6].f(k_stack, line_number);
+	else if (strcmp(cmd, "sub") == 0)
+		instructions[7].f(k_stack, line_number);
+	else if (strcmp(cmd, "mul") == 0)
+		instructions[8].f(k_stack, line_number);
+	else if (strcmp(cmd, "div") == 0)
+		instructions[9].f(k_stack, line_number);
+	else if (strcmp(cmd, "mod") == 0)
+		instructions[10].f(k_stack, line_number);
+	else if (strcmp(cmd, "pchar") == 0)
+		instructions[11].f(k_stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
