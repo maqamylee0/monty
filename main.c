@@ -11,13 +11,9 @@ int main(int argc, char **argv)
 	FILE *f;
 	char buffer[1024];
 	char *cmd;
-	char *line_number;
-	stack_t *k_stack;
-	int count;
-
-	k_stack = NULL;
-	count = 0;
-	line_number = NULL;
+	char *line_number = NULL;
+	stack_t *k_stack = NULL;
+	int count = 0;
 
 	if (argc != 2)
 	{
@@ -33,8 +29,8 @@ int main(int argc, char **argv)
 	while (fgets(buffer, sizeof(buffer), f) != NULL)
 	{
 		count++;
-	        buffer[strcspn(buffer, "\n")] = '\0'; 
-		buffer[strcspn(buffer, "$")] = '\0'; 
+		buffer[strcspn(buffer, "\n")] = '\0';
+		buffer[strcspn(buffer, "$")] = '\0';
 		cmd = strtok(buffer, " ");
 		line_number = strtok(NULL, " ");
 		if (strcmp(cmd, "push") == 0)
@@ -76,7 +72,6 @@ void free_stack(stack_t **k_stack)
  * sw_cmd- sitches command
  * @k_stack: stack
  * @line_number: line number
- * @count: keep track of position
  * @cmd: entered command
  * Return: nothing
  */
