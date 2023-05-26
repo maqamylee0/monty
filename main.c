@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 	buffer_len = 1024;
 	line_number = 0;
-	coumt = 0;
+	count = 0;
 	k_stack = NULL;
 
 	if (argc != 2)
