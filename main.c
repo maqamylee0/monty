@@ -15,7 +15,8 @@ int main(int argc, char **argv)
 		{"pop", pop},
 		{"swap", swap},
 		{"add", add},
-		{"nop", nop}};
+		{"nop", nop},
+		{NULL, NULL}};
 	File *f;
 	char buffer[1024];
 	char *cmd, *
