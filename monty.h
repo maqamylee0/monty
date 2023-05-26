@@ -34,8 +34,8 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-void sw_cmd(char *cmd, stack_t *k_stack, unsigned int line_number, int count);
-void free_stack(stack_t *k_stack);
+void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number);
+void free_stack(stack_t **k_stack);
 void push(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);

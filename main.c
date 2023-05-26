@@ -12,12 +12,12 @@ int main(int argc, char **argv)
 	char buffer[1024];
 	char *cmd;
 	char *line_number;
-	int count;
 	stack_t *k_stack;
+	int count;
 
-	line_number = NULL;
-	count = 0;
 	k_stack = NULL;
+	count = 0;
+	line_number = NULL;
 
 	if (argc != 2)
 	{
@@ -30,23 +30,25 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (fgets(buffer, sizeof(buffer), f))
+	while (fgets(buffer, sizeof(buffer), f) != NULL)
 	{
 		count++;
+		buffer[strcspn(buffer, "$")] = '\0';
 		cmd = strtok(buffer, " ");
 		line_number = strtok(NULL, " ");
 		if (strcmp(cmd, "push") == 0)
 		{
-			if ((line_number == NULL || atoi(line_number) == 0))
+			if (line_number == NULL || strlen(line_number) == 0)
 			{
 				fprintf(stderr, "L%d: usage: push integer", count);
 				exit(EXIT_FAILURE);
 			}
-			sw_cmd(cmd, k_stack, atoi(line_number), count);
 		}
+		if (line_number != NULL && strlen(line_number) != 0)
+			sw_cmd(cmd, &k_stack, atoi(line_number));
 	}
 	fclose(f);
-	free_stack(k_stack);
+	free_stack(&k_stack);
 	return (0);
 }
 
@@ -56,14 +58,14 @@ int main(int argc, char **argv)
  * Return: nothing
  */
 
-void free_stack(stack_t *k_stack)
+void free_stack(stack_t **k_stack)
 {
 	stack_t *top;
 
-	while (k_stack)
+	while (*k_stack)
 	{
-		top = k_stack;
-		k_stack = k_stack->next;
+		top = *k_stack;
+		*k_stack = (*k_stack)->next;
 		free(top);
 	}
 }
@@ -77,28 +79,28 @@ void free_stack(stack_t *k_stack)
  * Return: nothing
  */
 
-void sw_cmd(char *cmd, stack_t *k_stack, unsigned int line_number, int count)
+void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 {
 	instruction_t instructions[] = {{"push", push}, {"pall", pall},
 		{"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {NULL, NULL}};
 	if (strcmp(cmd, "push"))
-		instructions[0].f(&k_stack, line_number);
+		instructions[0].f(k_stack, line_number);
 	else if (strcmp(cmd, "pall"))
-		instructions[1].f(&k_stack, line_number);
+		instructions[1].f(k_stack, line_number);
 	else if (strcmp(cmd, "pint"))
-		instructions[2].f(&k_stack, line_number);
+		instructions[2].f(k_stack, line_number);
 	else if (strcmp(cmd, "pop"))
-		instructions[3].f(&k_stack, line_number);
+		instructions[3].f(k_stack, line_number);
 	else if (strcmp(cmd, "swap"))
-		instructions[4].f(&k_stack, line_number);
+		instructions[4].f(k_stack, line_number);
 	else if (strcmp(cmd, "add"))
-		instructions[5].f(&k_stack, line_number);
+		instructions[5].f(k_stack, line_number);
 	else if (strcmp(cmd, "nop"))
-		instructions[6].f(&k_stack, line_number);
+		instructions[6].f(k_stack, line_number);
 	else
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", count, cmd);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
 		exit(EXIT_FAILURE);
 	}
 }
