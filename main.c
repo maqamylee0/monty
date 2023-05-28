@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		{
 			if (line_number == NULL || strlen(line_number) == 0)
 			{
-				fprintf(stderr, "L%d: usage: push integer", count);
+				fprintf(stderr, "L%u: usage: push integer", count);
 				exit(EXIT_FAILURE);
 			}
 			sw_cmd(cmd, &k_stack, atoi(line_number));
@@ -108,7 +108,7 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 		instructions[11].f(k_stack, line_number);
 	else
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, cmd);
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cmd);
 		exit(EXIT_FAILURE);
 	}
 }
