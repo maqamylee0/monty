@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 			sw_cmd(cmd, &k_stack, atoi(line_number));
 		}
 		else
-			sw_cmd(cmd, &k_stack, 0);
+			sw_cmd(cmd, &k_stack, count);
 	}
 	fclose(f);
 	free_stack(&k_stack);
