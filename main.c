@@ -30,11 +30,11 @@ int main(int argc, char **argv)
 		buffer[strcspn(buffer, "\n")] = '\0';
 		buffer[strcspn(buffer, "$")] = '\0';
 		cmd = strtok(buffer, " ");
-		line_number = strtok(NULL, " ");
-		if (strcmp(cmd, "#"))
+		if (cmd[0] == "#")
 			continue;
 		if (strcmp(cmd, "push") == 0)
 		{
+			line_number = strtok(NULL, " ");
 			if (line_number == NULL || strlen(line_number) == 0)
 			{
 				fprintf(stderr, "L%u: usage: push integer", count);
