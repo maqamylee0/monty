@@ -81,7 +81,8 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 	instruction_t instructions[] = {{"push", push}, {"pall", pall},
 		{"pint", pint},	{"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub}, {"mul", mul}, {"div2", div2},
-		{"mod", mod}, {"pchar", pchar}, {NULL, NULL}};
+		{"mod", mod}, {"pchar", pchar}, {"pstr", pstr},
+		{"rotl", rotl}, {"rotr", rotr}, {NULL, NULL}};
 	if (strcmp(cmd, "push") == 0)
 		instructions[0].f(k_stack, line_number);
 	else if (strcmp(cmd, "pall") == 0)
@@ -106,6 +107,12 @@ void sw_cmd(char *cmd, stack_t **k_stack, unsigned int line_number)
 		instructions[10].f(k_stack, line_number);
 	else if (strcmp(cmd, "pchar") == 0)
 		instructions[11].f(k_stack, line_number);
+	else if (strcmp(cmd, "pstr") == 0)
+		instructions[12].f(k_stack, line_number);
+	else if (strcmp(cmd, "rotl") == 0)
+		instructions[13].f(k_stack, line_number);
+	else if (strcmp(cmd, "rotlr") == 0)
+		instructions[14].f(k_stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cmd);
