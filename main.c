@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		buffer[strcspn(buffer, "\n")] = '\0';
 		buffer[strcspn(buffer, "$")] = '\0';
 		cmd = strtok(buffer, " ");
-		if (cmd[0] == '#')
+		if (cmd[0] == '#' || cmd == NULL)
 			continue;
 		if (strcmp(cmd, "push") == 0)
 		{
