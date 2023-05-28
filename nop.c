@@ -45,7 +45,7 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div- divides top elements of stack
+ * div2- divides top elements of stack
  * @stack: stack
  * @line_number: line number
  * Return: nothing
